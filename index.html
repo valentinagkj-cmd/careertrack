@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CareerTrack — Internship & Job Application Tracker</title>
+  <!-- Google Fonts for clean, modern typography -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Main Application Wrapper -->
+  <div class="app-container">
+
+    <!-- Header Section -->
+    <header class="app-header">
+      <div class="brand">
+        <div class="brand-icon">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+            <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+          </svg>
+        </div>
+        <div>
+          <h1 class="brand-title">CareerTrack</h1>
+          <p class="brand-subtitle">Track your opportunities. Stay organized.</p>
+        </div>
+      </div>
+
+      <!-- Quick Action: Add Application Button -->
+      <button id="addAppBtn" class="btn btn-primary" type="button">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="12" y1="5" x2="12" y2="19"></line>
+          <line x1="5" y1="12" x2="19" y2="12"></line>
+        </svg>
+        <span>Add Application</span>
+      </button>
+    </header>
+
+    <!-- Main Content Area -->
+    <main class="main-content">
+
+      <!-- Statistics Cards Section -->
+      <section class="stats-section" aria-label="Application Summary Statistics">
+        
+        <!-- Stat Card 1: Total Applications -->
+        <article class="stat-card stat-total">
+          <div class="stat-header">
+            <span class="stat-label">Total Applications</span>
+            <div class="stat-icon" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                <polyline points="14 2 14 8 20 8"></polyline>
+                <line x1="16" y1="13" x2="8" y2="13"></line>
+                <line x1="16" y1="17" x2="8" y2="17"></line>
+                <polyline points="10 9 9 9 8 9"></polyline>
+              </svg>
+            </div>
+          </div>
+          <div class="stat-value" id="statTotal">0</div>
+          <p class="stat-caption">Total submitted jobs & internships</p>
+        </article>
+
+        <!-- Stat Card 2: Interviews -->
+        <article class="stat-card stat-interviews">
+          <div class="stat-header">
+            <span class="stat-label">Interviews</span>
+            <div class="stat-icon" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+              </svg>
+            </div>
+          </div>
+          <div class="stat-value" id="statInterviews">0</div>
+          <p class="stat-caption">Rounds scheduled or ongoing</p>
+        </article>
+
+        <!-- Stat Card 3: Selected -->
+        <article class="stat-card stat-selected">
+          <div class="stat-header">
+            <span class="stat-label">Selected</span>
+            <div class="stat-icon" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                <polyline points="22 4 12 14.01 9 11.01"></polyline>
+              </svg>
+            </div>
+          </div>
+          <div class="stat-value" id="statSelected">0</div>
+          <p class="stat-caption">Offers received & acceptances</p>
+        </article>
+
+        <!-- Stat Card 4: Rejected -->
+        <article class="stat-card stat-rejected">
+          <div class="stat-header">
+            <span class="stat-label">Rejected</span>
+            <div class="stat-icon" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"></circle>
+                <line x1="15" y1="9" x2="9" y2="15"></line>
+                <line x1="9" y1="9" x2="15" y2="15"></line>
+              </svg>
+            </div>
+          </div>
+          <div class="stat-value" id="statRejected">0</div>
+          <p class="stat-caption">Closed or passed applications</p>
+        </article>
+
+      </section>
+
+      <!-- Applications List Section -->
+      <section class="applications-section" aria-label="Applications List">
+        <div class="section-top-bar">
+          <div>
+            <h2 class="section-title">Applications</h2>
+            <p class="section-description">Keep track of your internship and job opportunities.</p>
+          </div>
+        </div>
+
+        <!-- Applications Cards Grid (Shown when 1+ applications exist) -->
+        <div class="applications-grid" id="applicationsGrid" style="display: none;">
+          <!-- Dynamically populated by app.js using safe DOM methods -->
+        </div>
+
+        <!-- Empty State Container (Shown when 0 applications exist) -->
+        <div class="empty-state" id="emptyState">
+          <div class="empty-state-illustration">
+            <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+              <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+              <line x1="12" y1="11" x2="12" y2="15"></line>
+              <line x1="10" y1="13" x2="14" y2="13"></line>
+            </svg>
+          </div>
+          <h3 class="empty-state-title">No applications yet.</h3>
+          <p class="empty-state-text">
+            You haven't added any job or internship applications so far. When you apply, click the button below to record your progress.
+          </p>
+          <button id="emptyAddBtn" class="btn btn-primary" type="button">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="12" y1="5" x2="12" y2="19"></line>
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+            </svg>
+            <span>Add Application</span>
+          </button>
+        </div>
+
+      </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="app-footer">
+      <p>CareerTrack &bull; Internship & Job Application Tracker</p>
+    </footer>
+
+    <!-- ====================================================================
+         Add Application Modal (Popup Form)
+         Beginner Note:
+         - A modal is a pop-up dialog that floats on top of the web page.
+         - By default, it is hidden by CSS.
+         - When you click "Add Application", JavaScript makes it visible.
+         - The rest of the page remains untouched behind a soft backdrop.
+         ==================================================================== -->
+    <div class="modal-overlay" id="applicationModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <div class="modal-card">
+        
+        <!-- Modal Header: Title and Close (X) Button -->
+        <div class="modal-header">
+          <div>
+            <h2 class="modal-title" id="modalTitle">Add Application</h2>
+            <p class="modal-subtitle" id="modalSubtitle">Track a new internship or job opportunity.</p>
+          </div>
+          <button class="modal-close-btn" id="closeModalBtn" type="button" aria-label="Close form modal">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+
+        <!-- Add / Edit Application Form -->
+        <form id="applicationForm" class="application-form" novalidate>
+          <!-- Hidden input storing ID when in Edit mode -->
+          <input type="hidden" id="editAppId" value="">
+
+          <div class="form-grid">
+            
+            <!-- Field 1: Company Name (Required) -->
+            <div class="form-group">
+              <label for="companyName" class="form-label">
+                Company Name <span class="required-indicator">*</span>
+              </label>
+              <input 
+                type="text" 
+                id="companyName" 
+                name="companyName" 
+                class="form-control" 
+                placeholder="e.g. Google, Spotify, Acme Corp" 
+                required
+              >
+            </div>
+
+            <!-- Field 2: Job / Internship Role (Required) -->
+            <div class="form-group">
+              <label for="jobRole" class="form-label">
+                Job/Internship Role <span class="required-indicator">*</span>
+              </label>
+              <input 
+                type="text" 
+                id="jobRole" 
+                name="jobRole" 
+                class="form-control" 
+                placeholder="e.g. Frontend Intern, Software Engineer" 
+                required
+              >
+            </div>
+
+            <!-- Field 3: Application Date -->
+            <div class="form-group">
+              <label for="appDate" class="form-label">Application Date</label>
+              <input 
+                type="date" 
+                id="appDate" 
+                name="appDate" 
+                class="form-control"
+              >
+            </div>
+
+            <!-- Field 4: Deadline -->
+            <div class="form-group">
+              <label for="appDeadline" class="form-label">Deadline</label>
+              <input 
+                type="date" 
+                id="appDeadline" 
+                name="appDeadline" 
+                class="form-control"
+              >
+            </div>
+
+            <!-- Field 5: Status Dropdown -->
+            <div class="form-group">
+              <label for="appStatus" class="form-label">Status</label>
+              <select id="appStatus" name="appStatus" class="form-control">
+                <option value="Applied">Applied</option>
+                <option value="Interviewing">Interviewing</option>
+                <option value="Selected">Selected</option>
+                <option value="Rejected">Rejected</option>
+              </select>
+            </div>
+
+            <!-- Field 6: Job Link -->
+            <div class="form-group">
+              <label for="jobLink" class="form-label">Job Link</label>
+              <input 
+                type="url" 
+                id="jobLink" 
+                name="jobLink" 
+                class="form-control" 
+                placeholder="https://company.com/careers/role"
+              >
+            </div>
+
+            <!-- Field 7: Notes (Spans across both columns on desktop) -->
+            <div class="form-group form-group-full">
+              <label for="appNotes" class="form-label">Notes</label>
+              <textarea 
+                id="appNotes" 
+                name="appNotes" 
+                class="form-control" 
+                rows="3" 
+                placeholder="Add notes like referral info, salary range, interview rounds, prep tips..."
+              ></textarea>
+            </div>
+
+          </div>
+
+          <!-- Form Buttons: Cancel and Save Application -->
+          <div class="form-actions">
+            <button type="button" class="btn btn-secondary" id="cancelBtn">
+              Cancel
+            </button>
+            <button type="submit" class="btn btn-primary" id="saveBtn">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path>
+                <polyline points="17 21 17 13 7 13 7 21"></polyline>
+                <polyline points="7 3 7 8 15 8"></polyline>
+              </svg>
+              <span id="saveBtnText">Save Application</span>
+            </button>
+          </div>
+        </form>
+
+      </div>
+    </div>
+
+  </div>
+
+  <!-- JavaScript File -->
+  <script src="app.js"></script>
+</body>
+</html>
